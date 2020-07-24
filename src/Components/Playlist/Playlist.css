@@ -1,0 +1,111 @@
+.list-comp {
+  width: 500px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  /* align-items: center; */
+  width: 500px;
+}
+.text-align {
+  text-align: center;
+}
+.no-codec {
+  font-size: 0.6rem;
+}
+.tab {
+  padding-top: 30px;
+  color: white;
+  overflow: hidden;
+  border: 0px;
+  background-color: transparent;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+}
+.tablinks {
+  color: white;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  border-bottom: 1px solid white;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px 6px 0px;
+  border: 0px;
+  border-top: none;
+}
+.tabcontent .img {
+  height: 110px;
+  width: 200px;
+}
+.tabcontent .playlist-loader {
+  background-color: black;
+  opacity: 0.2;
+}
+.justify-content-evenly {
+  justify-content: space-evenly;
+}
+.playlist-buttons-content {
+  flex: 2;
+}
+.list-item-img {
+  height: 20px;
+  width: 40px;
+}
+
+.dropdown-menu {
+  max-height: 200px;
+  overflow-y: auto;
+  width: 180px;
+}
+
+@media only screen and (max-width: 600px) {
+  .list-comp {
+    width: 320px;
+  }
+  .video-container {
+    flex-direction: column !important;
+    align-items: center;
+  }
+  .video-container > img {
+    margin-bottom: 10px;
+  }
+  .video-container > div > .dropdown {
+    margin-bottom: 10px;
+  }
+  .video-container > div > a {
+    margin-bottom: 10px;
+  }
+  .video-container > div > button {
+    margin-bottom: 10px;
+  }
+  .playlist-buttons-content{
+    margin-top: 10px;
+  }
+  .playlist-buttons-content button {
+    margin: 5px;
+  }
+  .playlist-buttons-content label {
+    margin: 5px;
+  }
+  .playlist-buttons-content a {
+    margin: 5px;
+  }
+  .playlist-buttons-content .select-label {
+    margin: 5px;
+  }
+}
