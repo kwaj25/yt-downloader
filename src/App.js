@@ -1,8 +1,10 @@
 import React from "react";
 import "./App.css";
 // import logo from "./logo.svg";
+import "bootstrap/dist/css/bootstrap.min.css";
 import Home from "./Components/Home/Home";
 import Instructions from "./Components/Instructions/Instructions";
+import Footer from "./Components/Footer/Footer";
 
 function App() {
   return (
@@ -10,11 +12,14 @@ function App() {
       <header className="header">
         <div className="label">
           {/* <img className="logo" src={logo} alt="Logo" /> */}
-          YT Downloader
+          YTMp3
         </div>
       </header>
-      <Home />
-      <Instructions/>
+      <main>
+        <Home />
+        <Instructions />
+      </main>
+      <Footer />
     </div>
   );
 }

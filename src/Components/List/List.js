@@ -1,5 +1,6 @@
 import React from "react";
 import "./List.css";
+import { ProgressBar } from "react-bootstrap";
 
 class List extends React.Component {
   constructor(props) {
@@ -8,6 +9,7 @@ class List extends React.Component {
       selectedFormat: "",
       selectedITag: "",
       selectedVideo: {},
+      progressbarStatus: false,
     };
   }
   componentDidMount() {
@@ -25,7 +27,20 @@ class List extends React.Component {
   }
 
   downloadAudio = () => {
-    window.location.href = `https://warm-ocean-51847.herokuapp.com/downloadAudio?url=${this.props.videoURL}`;
+    this.setState(
+      {
+        progressbarStatus: true,
+      },
+      () => {
+        window.location.href = `https://warm-ocean-51847.herokuapp.com/downloadAudio?url=${this.props.videoURL}`;
+      }
+    );
+
+    setTimeout(() => {
+      this.setState({
+        progressbarStatus: false,
+      });
+    }, 3000);
   };
 
   formatTitle = (title) => {
@@ -57,7 +72,20 @@ class List extends React.Component {
   };
 
   downloadVideo = () => {
-    window.location.href = `https://warm-ocean-51847.herokuapp.com/downloadVideo?url=${this.props.videoURL}&itag=${this.state.selectedITag}`;
+    this.setState(
+      {
+        progressbarStatus: true,
+      },
+      () => {
+        window.location.href = `https://warm-ocean-51847.herokuapp.com/downloadVideo?url=${this.props.videoURL}&itag=${this.state.selectedITag}`;
+      }
+    );
+
+    setTimeout(() => {
+      this.setState({
+        progressbarStatus: false,
+      });
+    }, 3000);
   };
 
   render() {
@@ -144,7 +172,7 @@ class List extends React.Component {
                     Download Mp3
                   </button>
                   <button
-                    onClick={this.downloadVideo}
+                    onClick={this.props.openModal}
                     className="btn btn-secondary btn-sm"
                   >
                     Download
@@ -154,7 +182,15 @@ class List extends React.Component {
             </div>
           </div>
 
-          <div id="Audio" className="tabcontent"></div>
+          {this.state.progressbarStatus && (
+            <ProgressBar
+              className="mr-4 mt-1"
+              animated
+              striped
+              variant="info"
+              now={100}
+            />
+          )}
         </div>
       </div>
     );

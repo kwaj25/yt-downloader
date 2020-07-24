@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import "./Playlist.css";
+import { ProgressBar } from "react-bootstrap";
 
 export class Playlist extends Component {
   constructor(props) {
@@ -13,6 +14,7 @@ export class Playlist extends Component {
       gotVideoDetails: false,
       selectedIndex: 0,
       videoURLPrefix: "https://www.youtube.com/watch?v=",
+      progressbarStatus: false,
     };
   }
   getVideoInfo = async (index) => {
@@ -20,7 +22,9 @@ export class Playlist extends Component {
       axios
         .get("https://warm-ocean-51847.herokuapp.com/getInfo", {
           params: {
-            url: this.state.videoURLPrefix+this.props.playlistInfo.videos[this.state.selectedIndex].id,
+            url:
+              this.state.videoURLPrefix +
+              this.props.playlistInfo.videos[this.state.selectedIndex].id,
           },
         })
         .then((response) => response.data)
@@ -89,9 +93,23 @@ export class Playlist extends Component {
   };
 
   downloadVideo = () => {
-    window.location.href = `https://warm-ocean-51847.herokuapp.com/downloadVideo?url=${
-      this.state.videoURLPrefix+this.props.playlistInfo.videos[this.state.selectedIndex].id
-    }&itag=${this.state.selectedITag}`;
+    this.setState(
+      {
+        progressbarStatus: true,
+      },
+      () => {
+        window.location.href = `https://warm-ocean-51847.herokuapp.com/downloadVideo?url=${
+          this.state.videoURLPrefix +
+          this.props.playlistInfo.videos[this.state.selectedIndex].id
+        }&itag=${this.state.selectedITag}`;
+      }
+    );
+
+    setTimeout(() => {
+      this.setState({
+        progressbarStatus: false,
+      });
+    }, 3000);
   };
 
   selectVideoFromPlayList = (index) => {
@@ -99,9 +117,23 @@ export class Playlist extends Component {
   };
 
   downloadAudio = () => {
-    window.location.href = `https://warm-ocean-51847.herokuapp.com/downloadAudio?url=${
-      this.state.videoURLPrefix+this.props.playlistInfo.videos[this.state.selectedIndex].id
-    }`;
+    this.setState(
+      {
+        progressbarStatus: true,
+      },
+      () => {
+        window.location.href = `https://warm-ocean-51847.herokuapp.com/downloadAudio?url=${
+          this.state.videoURLPrefix +
+          this.props.playlistInfo.videos[this.state.selectedIndex].id
+        }`;
+      }
+    );
+
+    setTimeout(() => {
+      this.setState({
+        progressbarStatus: false,
+      });
+    }, 3000);
   };
 
   render() {
@@ -126,7 +158,6 @@ export class Playlist extends Component {
                 {this.state.gotVideoDetails &&
                 this.state.playlistVideo.thumbnail ? (
                   <img
-                    className="mr-4"
                     alt="thumbnail not available"
                     src={this.state.playlistVideo.thumbnail.url}
                   />
@@ -142,7 +173,10 @@ export class Playlist extends Component {
                 <div className="playlist-buttons-content d-flex justify-content-evenly">
                   <div className="d-flex flex-column justify-content-evenly">
                     <div className="d-flex justify-content-center align-items-center">
-                      <label className="mb-0 select-label"> Select Video:</label>
+                      <label className="mb-0 select-label">
+                        {" "}
+                        Select Video:
+                      </label>
                     </div>
                     {this.state.selectedVideo && (
                       <div className="dropdown">
@@ -234,7 +268,7 @@ export class Playlist extends Component {
                     )}
                     {this.state.selectedVideo && (
                       <button
-                        onClick={this.downloadVideo}
+                        onClick={this.props.openModal}
                         className="btn btn-secondary btn-sm"
                       >
                         Download
@@ -253,7 +287,15 @@ export class Playlist extends Component {
             </div>
           </div>
 
-          <div id="Audio" className="tabcontent"></div>
+          {this.state.progressbarStatus && (
+            <ProgressBar
+              className="mr-4 mt-1"
+              animated
+              striped
+              variant="info"
+              now={100}
+            />
+          )}
         </div>
       </div>
     );

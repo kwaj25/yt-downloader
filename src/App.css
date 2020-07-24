@@ -10,6 +10,9 @@
   align-items: center;
   justify-content: flex-start;
 }
+main {
+  min-height: calc(100vh - 120px);
+}
 .label {
   padding-left: 20px;
   color: white;
@@ -19,4 +22,7 @@
   height: 40px;
   width: 40px;
   margin-right: 10px;
+}
+.progress {
+  height: 8px !important;
 }
