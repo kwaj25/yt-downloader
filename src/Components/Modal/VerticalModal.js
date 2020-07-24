@@ -27,7 +27,7 @@ export class VerticalModal extends Component {
         this.state.player.loadVideoById({
           videoId: this.props.videoId,
           startSeconds: 0,
-          endSeconds: 3,
+          endSeconds: 15,
         });
         this.state.player.playVideo();
         this.state.player.on("stateChange", (event) => {

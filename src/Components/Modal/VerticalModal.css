@@ -1,0 +1,9 @@
+#video-modal button {
+  background-color: #226089;
+  border-color: unset;
+}
+#video-modal button:focus {
+  outline: none;
+  box-shadow: none;
+  border-color: unset;
+}
