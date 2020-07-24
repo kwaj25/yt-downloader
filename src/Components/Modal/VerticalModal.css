@@ -7,3 +7,6 @@
   box-shadow: none;
   border-color: unset;
 }
+#video-modal .modal-footer{
+    justify-content: space-between;
+}

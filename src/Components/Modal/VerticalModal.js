@@ -20,7 +20,19 @@ export class VerticalModal extends Component {
     width = parseInt(width.substring(0, width.length - 2) - 30);
     this.setState(
       {
-        player: YouTubePlayer("videoAd"),
+        player: YouTubePlayer("videoAd", {
+          playerVars: {
+            controls: 0,
+            disablekb:0,
+            fs:0,
+            rel:0,
+            start:0,
+            end:15,
+            modestbranding: 1,
+            iv_load_policy:3,
+            cc_load_policy:1,
+          },
+        }),
       },
       () => {
         this.state.player.setSize(width, height);
@@ -90,6 +102,7 @@ export class VerticalModal extends Component {
           <div id="videoAd">{this.props.videoid}</div>
         </Modal.Body>
         <Modal.Footer>
+          <p>Please enjoy this 15 sec. ad while your download is being completed.</p>
           <Button onClick={this.props.onHide}>Close</Button>
         </Modal.Footer>
       </Modal>

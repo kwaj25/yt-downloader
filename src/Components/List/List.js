@@ -166,13 +166,19 @@ class List extends React.Component {
                 </div>
                 <div className="d-flex justify-content-evenly">
                   <button
-                    onClick={this.downloadAudio}
+                    onClick={() => {
+                      this.downloadAudio();
+                      this.props.openModal();
+                    }}
                     className="btn btn-secondary btn-sm"
                   >
                     Download Mp3
                   </button>
                   <button
-                    onClick={this.props.openModal}
+                    onClick={() => {
+                      this.downloadVideo();
+                      this.props.openModal();
+                    }}
                     className="btn btn-secondary btn-sm"
                   >
                     Download

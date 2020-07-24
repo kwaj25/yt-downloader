@@ -26,3 +26,9 @@ main {
 .progress {
   height: 8px !important;
 }
+.ytp-pause-overlay .ytp-scroll-min .ytp-scroll-max{
+  display: none !important;
+}
+.ytp-watermark{
+  display: none !important;
+}

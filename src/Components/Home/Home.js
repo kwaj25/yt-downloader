@@ -58,13 +58,13 @@ class Home extends React.Component {
   checkLinkType = () => {
     this.setState({ isVideoTypeLink: false, playlistInfo: {}, videoInfo: {} });
     const url = this.inputRef.current.value;
-    if (ytpl.validateURL(url)) {
-      this.setState({ isVideoTypeLink: false });
-      this.getPlaylistInfo();
-    } else {
+    if (ytdl.validateURL(url)) {
       this.setState({ isVideoTypeLink: true });
       this.getVideoInfo();
-    }
+    } else if (ytpl.validateURL(url)) {
+      this.setState({ isVideoTypeLink: false });
+      this.getPlaylistInfo();
+    } else return;
   };
 
   adjustClipHeight = (height) => {
@@ -188,11 +188,6 @@ class Home extends React.Component {
             }
             show={this.state.modalShow}
             onHide={() => {
-              if (this.state.isVideoTypeLink) {
-                this.listRef.current.downloadVideo();
-              } else {
-                this.playlistRef.current.downloadVideo();
-              }
               this.setState({ modalShow: false });
             }}
           />

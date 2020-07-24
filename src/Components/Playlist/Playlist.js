@@ -217,7 +217,10 @@ export class Playlist extends Component {
                       </div>
                     )}
                     <button
-                      onClick={this.downloadAudio}
+                      onClick={() => {
+                        this.downloadAudio();
+                        this.props.openModal();
+                      }}
                       className="btn btn-secondary btn-sm"
                     >
                       Download Mp3
@@ -268,7 +271,10 @@ export class Playlist extends Component {
                     )}
                     {this.state.selectedVideo && (
                       <button
-                        onClick={this.props.openModal}
+                        onClick={() => {
+                          this.downloadVideo();
+                          this.props.openModal();
+                        }}
                         className="btn btn-secondary btn-sm"
                       >
                         Download
