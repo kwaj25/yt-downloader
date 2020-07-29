@@ -77,7 +77,7 @@ class Home extends React.Component {
     const playListID = await ytpl.getPlaylistID(this.inputRef.current.value);
 
     axios
-      .get("https://warm-ocean-51847.herokuapp.com/playlistInfo", {
+      .get("http://64.227.24.24/playlistInfo", {
         params: {
           playListID,
         },
@@ -103,7 +103,7 @@ class Home extends React.Component {
   getVideoInfo = () => {
     this.setState({ gotVideoInfo: false, startLoader: true });
     axios
-      .get("https://warm-ocean-51847.herokuapp.com/getInfo", {
+      .get("http://64.227.24.24/getInfo", {
         params: {
           url: this.inputRef.current.value,
         },
