@@ -20,6 +20,7 @@ class Home extends React.Component {
       playListInfo: {},
       gotPlayListInfo: false,
       modalShow: false,
+      selectedVideoAd: "",
     };
     this.inputRef = React.createRef();
     this.listRef = React.createRef();
@@ -72,7 +73,6 @@ class Home extends React.Component {
   };
 
   getPlaylistInfo = async () => {
-    
     this.setState({ gotPlayListInfo: false, startLoader: true });
     const playListID = await ytpl.getPlaylistID(this.inputRef.current.value);
 
@@ -162,15 +162,17 @@ class Home extends React.Component {
             key={this.state.url}
             data={this.state.videoInfo}
             videoURL={this.state.url}
-            openModal={() => this.setState({ modalShow: true })}
+            openModal={(url) =>
+              this.setState({ modalShow: true, selectedVideoAd: url })
+            }
           />
         ) : (
           this.state.gotPlayListInfo && (
             <Playlist
               ref={this.playlistRef}
               playlistInfo={this.state.playListInfo}
-              openModal={() => {
-                this.setState({ modalShow: true });
+              openModal={(url) => {
+                this.setState({ modalShow: true, selectedVideoAd: url });
               }}
             />
           )
@@ -187,6 +189,7 @@ class Home extends React.Component {
                       ].id
                   )
             }
+            url={this.state.selectedVideoAd}
             show={this.state.modalShow}
             onHide={() => {
               this.setState({ modalShow: false });

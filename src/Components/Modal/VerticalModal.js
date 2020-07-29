@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Modal, Button } from "react-bootstrap";
-import YouTubePlayer from "youtube-player";
 import "./VerticalModal.css";
 
 export class VerticalModal extends Component {
@@ -11,44 +10,14 @@ export class VerticalModal extends Component {
       player: {},
     };
   }
-
   componentDidMount() {
     let height = (window.screen.availHeight * 40) / 100;
     let width = window.getComputedStyle(
       document.getElementsByClassName("modal-body")[0]
     ).width;
     width = parseInt(width.substring(0, width.length - 2) - 30);
-    this.setState(
-      {
-        player: YouTubePlayer("videoAd", {
-          playerVars: {
-            controls: 0,
-            disablekb:0,
-            fs:0,
-            rel:0,
-            start:0,
-            end:15,
-            modestbranding: 1,
-            iv_load_policy:3,
-            cc_load_policy:1,
-          },
-        }),
-      },
-      () => {
-        this.state.player.setSize(width, height);
-        this.state.player.loadVideoById({
-          videoId: this.props.videoId,
-          startSeconds: 0,
-          endSeconds: 15,
-        });
-        this.state.player.playVideo();
-        this.state.player.on("stateChange", (event) => {
-          if (event.data === 0) {
-            this.props.onHide();
-          }
-        });
-      }
-    );
+    document.getElementById("videoAd").height = height;
+    document.getElementById("videoAd").width = width;
 
     document.getElementById("video-modal").addEventListener("resize", () => {
       let height =
@@ -60,11 +29,28 @@ export class VerticalModal extends Component {
           document.getElementsByClassName("modal-body")[0]
         ).width;
       width = parseInt(width.substring(0, width.length - 2) - 30);
-      this.state.player.setSize(width, height);
+      document.getElementById("videoAd").height = height;
+      document.getElementById("videoAd").width = width;
+    });
+
+    let videoAd = document.getElementById("videoAd");
+    let self = this;
+    videoAd.addEventListener("timeupdate", function () {
+      if (this.currentTime > 15) {
+        self.props.onHide();
+      }
     });
   }
 
   componentWillUnmount() {
+    let videoAd = document.getElementById("videoAd");
+    let self = this;
+    videoAd.addEventListener("timeupdate", function () {
+      if (this.currentTime > 15) {
+        self.props.onHide();
+      }
+    });
+
     document.getElementById("video-modal").removeEventListener("resize", () => {
       console.log(
         window.getComputedStyle(
@@ -80,7 +66,8 @@ export class VerticalModal extends Component {
           document.getElementsByClassName("modal-body")[0]
         ).width;
       width = parseInt(width.substring(0, width.length - 2) - 30);
-      this.state.player.setSize(width, height);
+      document.getElementById("videoAd").height = height;
+      document.getElementById("videoAd").width = width;
     });
   }
 
@@ -99,10 +86,15 @@ export class VerticalModal extends Component {
           </Modal.Title>
         </Modal.Header> */}
         <Modal.Body>
-          <div id="videoAd">{this.props.videoid}</div>
+          {/* <div id="videoAd">{this.props.videoid}</div> */}
+          <video id="videoAd" autoplay="" name="media">
+            <source src={this.props.url} type="video/mp4" />
+          </video>
         </Modal.Body>
         <Modal.Footer>
-          <p>Please enjoy this 15 sec. ad while your download is being completed.</p>
+          <p>
+            Please enjoy this 15 sec. ad while your download is being completed.
+          </p>
           <Button onClick={this.props.onHide}>Close</Button>
         </Modal.Footer>
       </Modal>

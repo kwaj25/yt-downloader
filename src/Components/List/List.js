@@ -168,7 +168,7 @@ class List extends React.Component {
                   <button
                     onClick={() => {
                       this.downloadAudio();
-                      this.props.openModal();
+                      this.props.openModal(this.state.selectedVideo);
                     }}
                     className="btn btn-secondary btn-sm"
                   >
@@ -177,7 +177,7 @@ class List extends React.Component {
                   <button
                     onClick={() => {
                       this.downloadVideo();
-                      this.props.openModal();
+                      this.props.openModal(this.state.selectedVideo);
                     }}
                     className="btn btn-secondary btn-sm"
                   >
