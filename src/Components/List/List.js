@@ -32,7 +32,7 @@ class List extends React.Component {
         progressbarStatus: true,
       },
       () => {
-        window.location.href = `http://64.227.24.24/downloadAudio?url=${this.props.videoURL}`;
+        window.location.href = `https://64.227.24.24/downloadAudio?url=${this.props.videoURL}`;
       }
     );
 
@@ -77,7 +77,7 @@ class List extends React.Component {
         progressbarStatus: true,
       },
       () => {
-        window.location.href = `http://64.227.24.24/downloadVideo?url=${this.props.videoURL}&itag=${this.state.selectedITag}`;
+        window.location.href = `https://64.227.24.24/downloadVideo?url=${this.props.videoURL}&itag=${this.state.selectedITag}`;
       }
     );
 
