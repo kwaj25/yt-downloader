@@ -20,7 +20,7 @@ export class Playlist extends Component {
   getVideoInfo = async (index) => {
     this.setState({ gotVideoDetails: false, selectedIndex: index }, () => {
       axios
-        .get("https://64.227.24.24/getInfo", {
+        .get("", {
           params: {
             url:
               this.state.videoURLPrefix +
@@ -98,10 +98,7 @@ export class Playlist extends Component {
         progressbarStatus: true,
       },
       () => {
-        window.location.href = `https://64.227.24.24/downloadVideo?url=${
-          this.state.videoURLPrefix +
-          this.props.playlistInfo.videos[this.state.selectedIndex].id
-        }&itag=${this.state.selectedITag}`;
+        
       }
     );
 
@@ -122,10 +119,7 @@ export class Playlist extends Component {
         progressbarStatus: true,
       },
       () => {
-        window.location.href = `https://64.227.24.24/downloadAudio?url=${
-          this.state.videoURLPrefix +
-          this.props.playlistInfo.videos[this.state.selectedIndex].id
-        }`;
+        
       }
     );
 
